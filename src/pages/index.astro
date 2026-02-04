@@ -26,7 +26,7 @@ const posts = await getCollection("blog", ({data}) => !data.isDraft )
    <Connect />
   <section aria-labelledby="recent-posts" class="container rows">
      <Heading tagName="h2" tagSize="h2" id="recent-posts">Recent Blog Posts</Heading>
-      <div class="gird-wrapper">
+      <div class="grid-wrapper">
         {
           posts.sort((a,b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()).slice(0, 3).map((post) => <BlogCard tagName="h3" post={post} />)
         }
