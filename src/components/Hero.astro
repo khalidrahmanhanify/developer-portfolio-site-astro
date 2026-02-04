@@ -1,0 +1,49 @@
+---
+// image import
+import katie from "@/assets/avatar.jpeg"
+import Heading from "./ui/Heading.astro"
+import Link, { type LinkProps } from "./ui/Link.astro"
+
+interface Link extends LinkProps {
+    text: string;
+}
+
+type Props = {
+    title?: string;
+    content?: string;
+    links?: Link[]
+}
+
+// data
+const defaultContent = {
+    title: "👋 Hi, I’m Katie",
+    content: "I’m a self-taught designer and developer obsessed with quality.",
+    links: [
+    {
+        href: "/katie-haus-cv.pdf",
+        text: "Download CV",
+        variant: "secondary"
+    },
+    
+    {
+        href: "#connect",
+        text: "Let's Connect",
+        variant: "primary"
+    },
+]
+}
+
+const {title = defaultContent.title, content = defaultContent.content , links = defaultContent.links} = Astro.props;
+---
+<section aria-label="Hero Section" class="hero">
+    <img class="" src={katie.src} alt="Katie Haus">
+    <Heading tagName="h1" tagSize="h2">{title}</Heading>
+    <p>{content}</p>
+    <div class="columns">
+        {
+            links.map((link) => (
+                <Link href={link.href} variant={link.variant}>{link.text}</Link>
+            ))
+        }
+    </div>
+</section>

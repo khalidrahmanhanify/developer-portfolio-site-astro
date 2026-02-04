@@ -1,0 +1,22 @@
+---
+// content
+import { getCollection } from "astro:content";
+
+// components
+import Heading from "../ui/Heading.astro";
+import ProjectCard from "@/components/ProjectCard.astro"
+
+const projects = await getCollection("projects")
+
+type Props = {
+    limit?: number;
+    tagName: "h2" | "h3";
+}
+const {limit, tagName} = Astro.props;
+---
+    <div class="grid-wrapper">
+        {limit ? projects.slice(0, limit).map((project) => 
+            <ProjectCard project={project} tagName={tagName}/>
+        ) : projects.map((project) => 
+            <ProjectCard project={project} tagName={tagName}/>)}
+    </div>
